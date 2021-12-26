@@ -386,10 +386,10 @@ class AccountTypeManagerImpl extends AccountTypeManager
     private final BroadcastReceiver mSimBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (ContactsContract.SimContacts.ACTION_SIM_ACCOUNTS_CHANGED.equals(
-                    intent.getAction())) {
-                reloadSimAccounts();
-            }
+//            if (ContactsContract.SimContacts.ACTION_SIM_ACCOUNTS_CHANGED.equals(
+//                    intent.getAction())) {
+//                reloadSimAccounts();
+//            }
         }
     };
 
@@ -423,9 +423,9 @@ class AccountTypeManagerImpl extends AccountTypeManager
         filter = new IntentFilter(Intent.ACTION_LOCALE_CHANGED);
         mContext.registerReceiver(mBroadcastReceiver, filter);
 
-        IntentFilter simFilter = new IntentFilter(
-                ContactsContract.SimContacts.ACTION_SIM_ACCOUNTS_CHANGED);
-        mContext.registerReceiver(mSimBroadcastReceiver, simFilter);
+//        IntentFilter simFilter = new IntentFilter(
+//                ContactsContract.SimContacts.ACTION_SIM_ACCOUNTS_CHANGED);
+//        mContext.registerReceiver(mSimBroadcastReceiver, simFilter);
 
         mAccountManager.addOnAccountsUpdatedListener(this, mMainThreadHandler, false);
 
@@ -537,12 +537,12 @@ class AccountTypeManagerImpl extends AccountTypeManager
             @Override
             public List<AccountWithDataSet> call() throws Exception {
                 List<AccountWithDataSet> simAccountWithDataSets = new ArrayList<>();
-                List<ContactsContract.SimAccount> simAccounts =
-                        ContactsContract.SimContacts.getSimAccounts(mContext.getContentResolver());
-                for (ContactsContract.SimAccount simAccount : simAccounts) {
-                    simAccountWithDataSets.add(new AccountWithDataSet(simAccount.getAccountName(),
-                            simAccount.getAccountType(), null));
-                }
+//                List<ContactsContract.SimAccount> simAccounts =
+//                        ContactsContract.SimContacts.getSimAccounts(mContext.getContentResolver());
+//                for (ContactsContract.SimAccount simAccount : simAccounts) {
+//                    simAccountWithDataSets.add(new AccountWithDataSet(simAccount.getAccountName(),
+//                            simAccount.getAccountType(), null));
+//                }
                 return simAccountWithDataSets;
             }
         });

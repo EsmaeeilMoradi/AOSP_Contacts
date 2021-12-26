@@ -31,8 +31,8 @@ import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.CommonDataKinds.StructuredName;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.RawContacts;
-import android.provider.SimPhonebookContract;
-import android.provider.SimPhonebookContract.SimRecords;
+//import android.provider.SimPhonebookContract;
+//import android.provider.SimPhonebookContract.SimRecords;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
@@ -126,9 +126,10 @@ public class SimContactDaoImpl extends SimContactDao {
     }
 
     public ArrayList<SimContact> loadSimContacts(int subscriptionId) {
-        return loadFrom(
-                SimRecords.getContentUri(
-                        subscriptionId, SimPhonebookContract.ElementaryFiles.EF_ADN));
+//        return loadFrom(
+//                SimRecords.getContentUri(
+//                        subscriptionId, SimPhonebookContract.ElementaryFiles.EF_ADN));
+        return null;
     }
 
     @Override
@@ -242,12 +243,12 @@ public class SimContactDaoImpl extends SimContactDao {
     private List<SimCard> getSimCardsFromSubscriptions() {
         final SubscriptionManager subscriptionManager = (SubscriptionManager)
                 mContext.getSystemService(Context.TELEPHONY_SUBSCRIPTION_SERVICE);
-        final List<SubscriptionInfo> subscriptions = subscriptionManager
-                .getActiveSubscriptionInfoList();
+//        final List<SubscriptionInfo> subscriptions = subscriptionManager
+//                .getActiveSubscriptionInfoList();
         final ArrayList<SimCard> result = new ArrayList<>();
-        for (SubscriptionInfo subscriptionInfo : subscriptions) {
-            result.add(SimCard.create(subscriptionInfo));
-        }
+//        for (SubscriptionInfo subscriptionInfo : subscriptions) {
+//            result.add(SimCard.create(subscriptionInfo));
+//        }
         return result;
     }
 
@@ -261,45 +262,47 @@ public class SimContactDaoImpl extends SimContactDao {
     // concurrently. So we just have a global lock around it to prevent potential issues.
     private static final Object SIM_READ_LOCK = new Object();
     private ArrayList<SimContact> loadFrom(Uri uri) {
-        synchronized (SIM_READ_LOCK) {
-            final Cursor cursor = mResolver.query(uri,
-                    new String[]{
-                            SimRecords.RECORD_NUMBER,
-                            SimRecords.NAME,
-                            SimRecords.PHONE_NUMBER
-                    }, null, null);
-            if (cursor == null) {
-                // Assume null means there are no SIM contacts.
-                return new ArrayList<>(0);
-            }
-
-            try {
-                return loadFromCursor(cursor);
-            } finally {
-                cursor.close();
-            }
-        }
+//        synchronized (SIM_READ_LOCK) {
+//            final Cursor cursor = mResolver.query(uri,
+//                    new String[]{
+//                            SimRecords.RECORD_NUMBER,
+//                            SimRecords.NAME,
+//                            SimRecords.PHONE_NUMBER
+//                    }, null, null);
+//            if (cursor == null) {
+//                // Assume null means there are no SIM contacts.
+//                return new ArrayList<>(0);
+//            }
+//
+//            try {
+//                return loadFromCursor(cursor);
+//            } finally {
+//                cursor.close();
+//            }
+//        }
+        return null;
     }
 
     private ArrayList<SimContact> loadFromCursor(Cursor cursor) {
-        final int colRecordNumber = cursor.getColumnIndex(SimRecords.RECORD_NUMBER);
-        final int colName = cursor.getColumnIndex(SimRecords.NAME);
-        final int colNumber = cursor.getColumnIndex(SimRecords.PHONE_NUMBER);
-
-        final ArrayList<SimContact> result = new ArrayList<>();
-
-        while (cursor.moveToNext()) {
-            final int recordNumber = cursor.getInt(colRecordNumber);
-            final String name = cursor.getString(colName);
-            final String number = cursor.getString(colNumber);
-
-            final SimContact contact = new SimContact(recordNumber, name, number, null);
-            // Only include contact if it has some useful data
-            if (contact.hasName() || contact.hasPhone()) {
-                result.add(contact);
-            }
-        }
-        return result;
+//        final int colRecordNumber = cursor.getColumnIndex(SimRecords.RECORD_NUMBER);
+//        final int colName = cursor.getColumnIndex(SimRecords.NAME);
+//        final int colNumber = cursor.getColumnIndex(SimRecords.PHONE_NUMBER);
+//
+//        final ArrayList<SimContact> result = new ArrayList<>();
+//
+//        while (cursor.moveToNext()) {
+//            final int recordNumber = cursor.getInt(colRecordNumber);
+//            final String name = cursor.getString(colName);
+//            final String number = cursor.getString(colNumber);
+//
+//            final SimContact contact = new SimContact(recordNumber, name, number, null);
+//            // Only include contact if it has some useful data
+//            if (contact.hasName() || contact.hasPhone()) {
+//                result.add(contact);
+//            }
+//        }
+//        return result;
+        return null;
     }
 
     private Cursor queryRawContactsForSimContacts(List<SimContact> contacts) {

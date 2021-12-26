@@ -70,14 +70,14 @@ public interface DeviceLocalAccountTypeFactory {
 
         @Override
         public int classifyAccount(String accountType) {
-            for (ContactsContract.SimAccount simAccount :
-                    ContactsContract.SimContacts.getSimAccounts(
-                            mContext.getContentResolver())) {
-                if (accountType != null && Objects.equals(accountType,
-                        simAccount.getAccountType())) {
-                    return TYPE_SIM;
-                }
-            }
+//            for (ContactsContract.SimAccount simAccount :
+//                    ContactsContract.SimContacts.getSimAccounts(
+//                            mContext.getContentResolver())) {
+//                if (accountType != null && Objects.equals(accountType,
+//                        simAccount.getAccountType())) {
+//                    return TYPE_SIM;
+//                }
+//            }
             return accountType == null ||
                     Objects.equals(AccountWithDataSet.getLocalAccount(mContext).type, accountType)
                     ? TYPE_DEVICE : TYPE_OTHER;

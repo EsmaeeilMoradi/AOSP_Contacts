@@ -623,7 +623,7 @@ public class PhoneNumberListAdapter extends ContactEntryListAdapter {
                 final long id = mFirstExtendedDirectoryId + i;
                 final DirectoryPartition directory = mExtendedDirectories.get(i);
                 if (getPartitionByDirectoryId(id) == -1) {
-                    addPartition(insertIndex, directory);
+//                    addPartition(insertIndex, directory);
                     directory.setDirectoryId(id);
                 }
             }

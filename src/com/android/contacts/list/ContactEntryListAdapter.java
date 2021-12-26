@@ -649,7 +649,9 @@ public abstract class ContactEntryListAdapter extends IndexerListAdapter {
         }
 
         final Resources res = getContext().getResources();
-        final int headerPaddingTop = partitionIndex == 1 && getPartition(0).isEmpty()?
+//        final int headerPaddingTop = partitionIndex == 1 && getPartition(0).isEmpty()?
+//                0 : res.getDimensionPixelOffset(R.dimen.directory_header_extra_top_padding);
+        final int headerPaddingTop = partitionIndex == 1 && getPartition(0).getShowIfEmpty()?
                 0 : res.getDimensionPixelOffset(R.dimen.directory_header_extra_top_padding);
         // There should be no extra padding at the top of the first directory header
         view.setPaddingRelative(view.getPaddingStart(), headerPaddingTop, view.getPaddingEnd(),
